@@ -181,13 +181,13 @@ export default function SupervisorPodPage() {
   return (
     <div className="space-y-6">
       {/* Header with Pod Name and Time */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">{pod.name}</h1>
-          <p className="text-slate-600">{currentSupervisor.name} - Supervisor</p>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900">{pod.name}</h1>
+          <p className="text-sm sm:text-base text-slate-600">{currentSupervisor.name} - Supervisor</p>
         </div>
-        <div className="text-right">
-          <p className="text-3xl font-mono font-bold text-slate-900">
+        <div className="text-left sm:text-right">
+          <p className="text-2xl sm:text-3xl font-mono font-bold text-slate-900">
             {currentTime.toLocaleTimeString('en-US', {
               hour: '2-digit',
               minute: '2-digit',
@@ -195,7 +195,7 @@ export default function SupervisorPodPage() {
               hour12: true,
             })}
           </p>
-          <p className="text-sm text-slate-500">
+          <p className="text-xs sm:text-sm text-slate-500">
             {currentTime.toLocaleDateString('en-US', {
               weekday: 'long',
               month: 'short',
@@ -216,50 +216,50 @@ export default function SupervisorPodPage() {
       )}
 
       {/* Quick Stats */}
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
         <Card className="border-0 shadow-lg">
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 sm:pt-6">
             <div className="text-center">
-              <div className={`w-16 h-16 rounded-full ${statusColor} mx-auto flex items-center justify-center text-white mb-2 transition-all duration-300`}>
-                <span className="text-2xl font-bold">{waitingStudents.length}</span>
+              <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full ${statusColor} mx-auto flex items-center justify-center text-white mb-2 transition-all duration-300`}>
+                <span className="text-xl sm:text-2xl font-bold">{waitingStudents.length}</span>
               </div>
-              <p className="text-sm text-slate-500">Waiting</p>
+              <p className="text-xs sm:text-sm text-slate-500">Waiting</p>
             </div>
           </CardContent>
         </Card>
 
         <Card className="border-0 shadow-lg">
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 sm:pt-6">
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-blue-500 mx-auto flex items-center justify-center text-white mb-2">
-                <span className="text-2xl font-bold">{boardingStudents.length}</span>
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-blue-500 mx-auto flex items-center justify-center text-white mb-2">
+                <span className="text-xl sm:text-2xl font-bold">{boardingStudents.length}</span>
               </div>
-              <p className="text-sm text-slate-500">Boarding</p>
+              <p className="text-xs sm:text-sm text-slate-500">Boarding</p>
             </div>
           </CardContent>
         </Card>
 
         <Card className="border-0 shadow-lg">
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 sm:pt-6">
             <div className="text-center">
-              <div className="w-16 h-16 rounded-full bg-green-500 mx-auto flex items-center justify-center text-white mb-2">
-                <span className="text-2xl font-bold">{totalBoarded}</span>
+              <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-green-500 mx-auto flex items-center justify-center text-white mb-2">
+                <span className="text-xl sm:text-2xl font-bold">{totalBoarded}</span>
               </div>
-              <p className="text-sm text-slate-500">Boarded Today</p>
+              <p className="text-xs sm:text-sm text-slate-500">Boarded</p>
             </div>
           </CardContent>
         </Card>
 
         <Card className="border-0 shadow-lg">
-          <CardContent className="pt-6">
+          <CardContent className="pt-4 sm:pt-6">
             <div className="text-center">
-              <div className={`w-16 h-16 rounded-full ${isShuttleLoading ? 'bg-amber-500 animate-pulse' : 'bg-blue-100'} mx-auto flex items-center justify-center ${isShuttleLoading ? 'text-white' : 'text-blue-600'} mb-2`}>
-                <span className="text-xl font-bold">
+              <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-full ${isShuttleLoading ? 'bg-amber-500 animate-pulse' : 'bg-blue-100'} mx-auto flex items-center justify-center ${isShuttleLoading ? 'text-white' : 'text-blue-600'} mb-2`}>
+                <span className="text-lg sm:text-xl font-bold">
                   {isShuttleLoading ? 'NOW' : Math.ceil(nextShuttleEta * 60) + 's'}
                 </span>
               </div>
-              <p className="text-sm text-slate-500">
-                {isShuttleLoading ? 'Loading' : 'Next Shuttle'}
+              <p className="text-xs sm:text-sm text-slate-500">
+                {isShuttleLoading ? 'Loading' : 'Shuttle'}
               </p>
             </div>
           </CardContent>
@@ -268,29 +268,29 @@ export default function SupervisorPodPage() {
 
       {/* Shuttle Status */}
       <Card className={`border-0 shadow-lg ${isShuttleLoading ? 'bg-amber-50 border-2 border-amber-300' : 'bg-blue-50'}`}>
-        <CardContent className="py-4">
-          <div className="flex items-center justify-between">
+        <CardContent className="py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${isShuttleLoading ? 'bg-amber-100 text-amber-600' : 'bg-blue-100 text-blue-600'}`}>
-                <svg className={`w-6 h-6 ${isShuttleLoading ? 'animate-bounce' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center flex-shrink-0 ${isShuttleLoading ? 'bg-amber-100 text-amber-600' : 'bg-blue-100 text-blue-600'}`}>
+                <svg className={`w-5 h-5 sm:w-6 sm:h-6 ${isShuttleLoading ? 'animate-bounce' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
                 </svg>
               </div>
               <div>
-                <p className={`font-semibold text-lg ${isShuttleLoading ? 'text-amber-900' : 'text-blue-900'}`}>
-                  {isShuttleLoading ? 'Shuttle Loading - Students Boarding' : 'Shuttle 3 En Route'}
+                <p className={`font-semibold text-sm sm:text-lg ${isShuttleLoading ? 'text-amber-900' : 'text-blue-900'}`}>
+                  {isShuttleLoading ? 'Shuttle Loading' : 'Shuttle 3 En Route'}
                 </p>
-                <p className={`text-sm ${isShuttleLoading ? 'text-amber-700' : 'text-blue-700'}`}>
+                <p className={`text-xs sm:text-sm ${isShuttleLoading ? 'text-amber-700' : 'text-blue-700'}`}>
                   {isShuttleLoading
-                    ? `${boardingStudents.length} students boarding now`
-                    : `Arriving in ${Math.ceil(nextShuttleEta)} minutes`
+                    ? `${boardingStudents.length} students boarding`
+                    : `Arriving in ${Math.ceil(nextShuttleEta)} min`
                   }
                 </p>
               </div>
             </div>
             {isShuttleLoading && (
               <Button
-                className="bg-amber-600 hover:bg-amber-700"
+                className="bg-amber-600 hover:bg-amber-700 w-full sm:w-auto"
                 onClick={handleDispatchShuttle}
                 disabled={waitingStudents.length > 0 || boardingStudents.length > 0}
               >
@@ -319,12 +319,12 @@ export default function SupervisorPodPage() {
 
       {/* Students List */}
       <Card className="border-0 shadow-lg">
-        <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle className="text-lg flex items-center gap-2">
-            <span className="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+        <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 sm:pb-6">
+          <CardTitle className="text-base sm:text-lg flex items-center gap-2">
+            <span className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-emerald-500 animate-pulse"></span>
             Students at Pod ({waitingStudents.length + boardingStudents.length})
           </CardTitle>
-          <Button variant="outline" onClick={handleManualCheckIn}>
+          <Button variant="outline" size="sm" onClick={handleManualCheckIn} className="w-full sm:w-auto">
             <svg className="w-4 h-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -332,38 +332,38 @@ export default function SupervisorPodPage() {
           </Button>
         </CardHeader>
         <CardContent>
-          <div className="space-y-2 max-h-[400px] overflow-y-auto">
+          <div className="space-y-2 max-h-[300px] sm:max-h-[400px] overflow-y-auto">
             {checkedInStudents.map((student) => (
               <div
                 key={student.id}
-                className={`flex items-center gap-4 p-4 rounded-xl transition-all duration-500 ${
+                className={`flex items-center gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl transition-all duration-500 ${
                   student.status === 'boarding'
-                    ? 'bg-blue-100 border-2 border-blue-300 animate-pulse translate-x-2'
+                    ? 'bg-blue-100 border-2 border-blue-300 animate-pulse translate-x-1 sm:translate-x-2'
                     : 'bg-slate-50'
                 }`}
               >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-lg transition-all ${
+                <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center text-white font-bold text-base sm:text-lg transition-all flex-shrink-0 ${
                   student.status === 'boarding'
                     ? 'bg-blue-500'
                     : 'bg-gradient-to-br from-emerald-400 to-teal-500'
                 }`}>
                   {student.name.charAt(0)}
                 </div>
-                <div className="flex-1">
-                  <p className="font-semibold text-slate-900">{student.name}</p>
-                  <p className="text-sm text-slate-500">
-                    {student.grade} • Checked in {formatTimeAgo(student.checkInTime)}
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-sm sm:text-base text-slate-900 truncate">{student.name}</p>
+                  <p className="text-xs sm:text-sm text-slate-500 truncate">
+                    {student.grade} • {formatTimeAgo(student.checkInTime)}
                   </p>
                 </div>
                 <Badge
                   variant="outline"
-                  className={
+                  className={`text-xs flex-shrink-0 ${
                     student.status === 'boarding'
                       ? 'bg-blue-100 text-blue-700 border-blue-300 animate-pulse'
                       : 'bg-amber-100 text-amber-700 border-amber-200'
-                  }
+                  }`}
                 >
-                  {student.status === 'boarding' ? 'Boarding...' : 'Waiting'}
+                  {student.status === 'boarding' ? 'Boarding' : 'Waiting'}
                 </Badge>
               </div>
             ))}
@@ -381,14 +381,14 @@ export default function SupervisorPodPage() {
       </Card>
 
       {/* Quick Actions */}
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-3 sm:gap-4">
         <Button
           variant="outline"
           size="lg"
-          className="h-16"
+          className="h-12 sm:h-16 text-sm sm:text-base"
           onClick={() => toast.info('Reporting issue', { description: 'Opening issue report form...' })}
         >
-          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
           </svg>
           Report Issue
@@ -396,10 +396,10 @@ export default function SupervisorPodPage() {
         <Button
           variant="outline"
           size="lg"
-          className="h-16"
+          className="h-12 sm:h-16 text-sm sm:text-base"
           onClick={() => toast.info('Contacting admin', { description: 'Opening chat with admin...' })}
         >
-          <svg className="w-5 h-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <svg className="w-4 h-4 sm:w-5 sm:h-5 mr-1.5 sm:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z" />
           </svg>
           Contact Admin

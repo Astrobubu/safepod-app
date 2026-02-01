@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { LiveMap3D, ShuttlePosition } from '@/components/shared/LiveMap3D';
 import { pods } from '@/data/mock-data';
 
@@ -11,6 +12,7 @@ export default function AdminOperationsPage() {
   const [shuttleData, setShuttleData] = useState<ShuttlePosition[]>([]);
   const [podCounts, setPodCounts] = useState<Record<string, number>>({});
   const [alerts, setAlerts] = useState<{ type: 'warning' | 'info'; message: string }[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const lastUpdateRef = useRef(0);
 
   // Update time every second
@@ -71,7 +73,7 @@ export default function AdminOperationsPage() {
   const studentsOnShuttles = shuttleData.reduce((sum, s) => sum + s.studentsOnBoard, 0);
 
   return (
-    <div className="flex h-[calc(100vh-64px)]">
+    <div className="flex h-[calc(100vh-56px)] sm:h-[calc(100vh-64px)]">
       {/* Main Map Area */}
       <div className="flex-1 relative">
         <LiveMap3D
@@ -79,41 +81,41 @@ export default function AdminOperationsPage() {
           onShuttleUpdate={handleShuttleUpdate}
         />
 
-        {/* Floating Stats */}
-        <div className="absolute top-4 left-4 flex gap-3">
+        {/* Floating Stats - Responsive */}
+        <div className="absolute top-4 left-4 flex flex-col sm:flex-row gap-2 sm:gap-3">
           <Card className="shadow-lg border-0 bg-black/80 backdrop-blur-sm text-white">
-            <CardContent className="py-3 px-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <CardContent className="py-2 px-3 sm:py-3 sm:px-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-400">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">{totalStudents}</p>
-                  <p className="text-xs text-white/70">At Pods</p>
+                  <p className="text-xl sm:text-2xl font-bold">{totalStudents}</p>
+                  <p className="text-[10px] sm:text-xs text-white/70">At Pods</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
           <Card className="shadow-lg border-0 bg-black/80 backdrop-blur-sm text-white">
-            <CardContent className="py-3 px-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <CardContent className="py-2 px-3 sm:py-3 sm:px-4">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-400">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-2xl font-bold">{activeShuttles}</p>
-                  <p className="text-xs text-white/70">Active Shuttles</p>
+                  <p className="text-xl sm:text-2xl font-bold">{activeShuttles}</p>
+                  <p className="text-[10px] sm:text-xs text-white/70">Shuttles</p>
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="shadow-lg border-0 bg-black/80 backdrop-blur-sm text-white">
+          <Card className="hidden sm:block shadow-lg border-0 bg-black/80 backdrop-blur-sm text-white">
             <CardContent className="py-3 px-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center text-purple-400">
@@ -133,8 +135,8 @@ export default function AdminOperationsPage() {
         {/* Time display */}
         <div className="absolute top-4 right-4">
           <Card className="shadow-lg border-0 bg-black/80 backdrop-blur-sm text-white">
-            <CardContent className="py-2 px-4">
-              <p className="text-xl font-mono font-semibold">
+            <CardContent className="py-1.5 px-3 sm:py-2 sm:px-4">
+              <p className="text-base sm:text-xl font-mono font-semibold">
                 {currentTime.toLocaleTimeString('en-US', {
                   hour: '2-digit',
                   minute: '2-digit',
@@ -146,8 +148,18 @@ export default function AdminOperationsPage() {
           </Card>
         </div>
 
-        {/* Legend */}
-        <div className="absolute bottom-4 left-4">
+        {/* Mobile sidebar toggle button */}
+        <button
+          onClick={() => setSidebarOpen(true)}
+          className="lg:hidden absolute bottom-4 right-4 z-10 bg-slate-900 text-white p-3 rounded-full shadow-lg"
+        >
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+        </button>
+
+        {/* Legend - Hidden on mobile */}
+        <div className="hidden sm:block absolute bottom-4 left-4">
           <Card className="shadow-lg border-0 bg-black/80 backdrop-blur-sm text-white">
             <CardContent className="py-3 px-4">
               <div className="flex items-center gap-4 text-sm">
@@ -169,8 +181,34 @@ export default function AdminOperationsPage() {
         </div>
       </div>
 
+      {/* Mobile sidebar overlay */}
+      {sidebarOpen && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <div className="w-80 border-l bg-slate-900 overflow-y-auto text-white">
+      <div className={`
+        fixed lg:relative inset-y-0 right-0 z-50
+        w-80 border-l bg-slate-900 overflow-y-auto text-white
+        transform transition-transform duration-300 ease-in-out
+        ${sidebarOpen ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'}
+      `}>
+        {/* Mobile close button */}
+        <div className="lg:hidden flex justify-between items-center p-4 border-b border-slate-700">
+          <span className="font-semibold">Dashboard</span>
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="p-2 rounded-lg hover:bg-slate-800"
+          >
+            <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
         {/* Alerts */}
         <div className="p-4 border-b border-slate-700">
           <h2 className="font-semibold mb-3 flex items-center gap-2">

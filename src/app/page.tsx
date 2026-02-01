@@ -51,45 +51,45 @@ const roles = [
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-emerald-50">
-      <div className="container mx-auto px-4 py-16 max-w-5xl">
+      <div className="container mx-auto px-4 py-8 sm:py-16 max-w-5xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 mb-6">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
-              <svg className="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <div className="text-center mb-8 sm:mb-16">
+          <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25">
+              <svg className="w-6 h-6 sm:w-8 sm:h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
               </svg>
             </div>
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            <h1 className="text-2xl sm:text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
               SafePod
             </h1>
           </div>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
             Smart school drop-off management for GEMS Jumeirah Primary School
           </p>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-2">
             Al Safa 1, Dubai
           </p>
         </div>
 
         {/* Role Selection Cards */}
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
           {roles.map((role) => (
             <Link key={role.id} href={role.href}>
               <Card className="group h-full cursor-pointer transition-all duration-300 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 border-0 bg-white/80 backdrop-blur-sm">
                 <CardHeader className="text-center pb-2">
-                  <div className={`mx-auto w-20 h-20 rounded-2xl ${role.bgColor} ${role.textColor} flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110`}>
-                    {role.icon}
+                  <div className={`mx-auto w-16 h-16 sm:w-20 sm:h-20 rounded-xl sm:rounded-2xl ${role.bgColor} ${role.textColor} flex items-center justify-center mb-3 sm:mb-4 transition-transform duration-300 group-hover:scale-110`}>
+                    <div className="scale-75 sm:scale-100">{role.icon}</div>
                   </div>
-                  <CardTitle className="text-xl">{role.title}</CardTitle>
+                  <CardTitle className="text-lg sm:text-xl">{role.title}</CardTitle>
                 </CardHeader>
-                <CardContent className="text-center">
-                  <CardDescription className="text-base">
+                <CardContent className="text-center pb-4 sm:pb-6">
+                  <CardDescription className="text-sm sm:text-base">
                     {role.description}
                   </CardDescription>
-                  <div className={`mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${role.color} text-white text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+                  <div className={`mt-4 sm:mt-6 inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full bg-gradient-to-r ${role.color} text-white text-xs sm:text-sm font-medium sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300`}>
                     Continue
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                     </svg>
                   </div>
@@ -100,7 +100,7 @@ export default function HomePage() {
         </div>
 
         {/* Footer note */}
-        <div className="text-center mt-16 text-sm text-muted-foreground">
+        <div className="text-center mt-8 sm:mt-16 text-xs sm:text-sm text-muted-foreground">
           <p>Demo Mode - No authentication required</p>
         </div>
       </div>

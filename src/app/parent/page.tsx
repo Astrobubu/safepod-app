@@ -68,8 +68,8 @@ export default function ParentDashboard() {
     <div className="space-y-6">
       {/* Welcome Header */}
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Good Morning!</h1>
-        <p className="text-slate-600">Track {student.name}'s journey to school in real-time.</p>
+        <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Good Morning!</h1>
+        <p className="text-sm sm:text-base text-slate-600">Track {student.name}'s journey to school in real-time.</p>
       </div>
 
       {/* Student Selector (if multiple children) */}
@@ -135,27 +135,27 @@ export default function ParentDashboard() {
               <ParentTrackingMap
                 podId={pod.id}
                 shuttleProgress={shuttleProgress}
-                className="w-full h-[250px]"
+                className="w-full h-[200px] sm:h-[250px]"
               />
             </div>
           )}
 
           {/* ETA Card */}
           {currentStage === 'on_shuttle' && eta > 0 && (
-            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-4 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
-                  <svg className="w-6 h-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl p-3 sm:p-4 flex items-center justify-between">
+              <div className="flex items-center gap-2 sm:gap-3">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 flex-shrink-0">
+                  <svg className="w-5 h-5 sm:w-6 sm:h-6 animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-emerald-700">Estimated arrival at school</p>
-                  <p className="text-2xl font-bold text-emerald-900">~{Math.ceil(eta)} minutes</p>
+                  <p className="text-xs sm:text-sm text-emerald-700">Estimated arrival</p>
+                  <p className="text-xl sm:text-2xl font-bold text-emerald-900">~{Math.ceil(eta)} min</p>
                 </div>
               </div>
               <div className="text-right">
-                <Badge variant="outline" className="bg-white text-emerald-700 border-emerald-200">
+                <Badge variant="outline" className="bg-white text-emerald-700 border-emerald-200 text-xs">
                   On Track
                 </Badge>
               </div>
@@ -218,7 +218,7 @@ export default function ParentDashboard() {
       </Card>
 
       {/* Quick Actions */}
-      <div className="flex gap-3">
+      <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
         <Button
           variant="outline"
           className="flex-1"
